@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/net.PaulChristensen/!svn/ver/85/TestRunner/RoundTripClientCall
+END
+RoundTripClientCall.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/net.PaulChristensen/!svn/ver/21/TestRunner/RoundTripClientCall/RoundTripClientCall.csproj
+END
+app.config
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/net.PaulChristensen/!svn/ver/21/TestRunner/RoundTripClientCall/app.config
+END
+ServiceRunner.cs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/net.PaulChristensen/!svn/ver/85/TestRunner/RoundTripClientCall/ServiceRunner.cs
+END

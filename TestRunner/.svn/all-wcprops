@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestRunner
+END
+app.config
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/net.PaulChristensen/!svn/ver/21/TestRunner/TestRunner/app.config
+END
+TestRunner.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestRunner/TestRunner.csproj
+END
+Program.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestRunner/Program.cs
+END

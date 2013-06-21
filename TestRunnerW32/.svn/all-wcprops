@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestRunnerW32
+END
+App.xaml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestRunnerW32/App.xaml
+END
+App.xaml.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestRunnerW32/App.xaml.cs
+END
+TestRunnerW32.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/net.PaulChristensen/!svn/ver/86/TestRunner/TestRunnerW32/TestRunnerW32.csproj
+END
+app.config
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/net.PaulChristensen/!svn/ver/86/TestRunner/TestRunnerW32/app.config
+END
+Window1.xaml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/net.PaulChristensen/!svn/ver/86/TestRunner/TestRunnerW32/Window1.xaml
+END
+Runner.xaml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestRunnerW32/Runner.xaml
+END
+Window1.xaml.cs
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/net.PaulChristensen/!svn/ver/86/TestRunner/TestRunnerW32/Window1.xaml.cs
+END
+Runner.xaml.cs
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestRunnerW32/Runner.xaml.cs
+END

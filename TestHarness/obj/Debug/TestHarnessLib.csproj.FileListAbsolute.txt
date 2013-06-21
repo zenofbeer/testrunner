@@ -1,0 +1,8 @@
+C:\Dev\net.PaulChristensen\TestRunner\TestBin\HarnessConfig.xml
+C:\Dev\net.PaulChristensen\TestRunner\TestBin\net.PaulChristensen.TestHarnessLib.dll
+C:\Dev\net.PaulChristensen\TestRunner\TestBin\net.PaulChristensen.TestHarnessLib.pdb
+C:\Dev\net.PaulChristensen\TestRunner\TestHarness\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\net.PaulChristensen\TestRunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.dll
+C:\Dev\net.PaulChristensen\TestRunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.pdb
+C:\Dev\net.PaulChristensen\TestRunner\TestBin\Docs\License.txt
+C:\Dev\net.PaulChristensen\TestRunner\TestBin\Docs\TestTemplate.cs

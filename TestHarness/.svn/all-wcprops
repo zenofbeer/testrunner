@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestHarness
+END
+TestTemplate.cs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/net.PaulChristensen/!svn/ver/22/TestRunner/TestHarness/TestTemplate.cs
+END
+IHarness.cs
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestHarness/IHarness.cs
+END
+ITestBuilder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/net.PaulChristensen/!svn/ver/85/TestRunner/TestHarness/ITestBuilder.cs
+END
+Harness.cs
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestHarness/Harness.cs
+END
+HarnessConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/net.PaulChristensen/!svn/ver/89/TestRunner/TestHarness/HarnessConfig.xml
+END
+TestHarnessLib.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/net.PaulChristensen/!svn/ver/89/TestRunner/TestHarness/TestHarnessLib.csproj
+END
+TestBuilder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/net.PaulChristensen/!svn/ver/89/TestRunner/TestHarness/TestBuilder.cs
+END
+Enums.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/net.PaulChristensen/!svn/ver/87/TestRunner/TestHarness/Enums.cs
+END
+IW32Console.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/net.PaulChristensen/!svn/ver/88/TestRunner/TestHarness/IW32Console.cs
+END
+ITest.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/net.PaulChristensen/!svn/ver/85/TestRunner/TestHarness/ITest.cs
+END
