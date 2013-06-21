@@ -146,6 +146,14 @@ namespace net.PaulChristensen.TestHarnessLib
                 }
             }
 
+            foreach (var attribute in attributeCollection)
+            {
+                if (!newAttributeCollection.ContainsKey(attribute.Name.ToString()))
+                {
+                    newAttributeCollection[attribute.Name.ToString()] = attribute.Value;
+                }
+            }
+
             _testProperties.Push(newAttributeCollection);
 
             IEnumerable<XElement> dependancyNodes = _nextElement.Elements("dependency");
@@ -256,9 +264,9 @@ namespace net.PaulChristensen.TestHarnessLib
                 if (attribute.Name.ToString() == "path")
                 {
                     tempString = tempString.TrimEnd('\\') + '\\';
+                    SourceTestBatch.Path = tempString;
                 }
-                currentAttributeCollection[attribute.Name.ToString()] = tempString;
-                SourceTestBatch.Path = tempString;
+                currentAttributeCollection[attribute.Name.ToString()] = tempString;                
             }
 
             _testProperties.Push(currentAttributeCollection);

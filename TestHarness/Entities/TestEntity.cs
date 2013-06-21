@@ -104,8 +104,8 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
                 {
                     StringHelper.TrimTrailingSlashes(ref tempValue);
                 }
-            }
-            Path = testProperties[Constants.TestPathAttribute] + tempValue;            
+                Path = testProperties[Constants.TestPathAttribute] + tempValue; 
+            }                       
         }
         #endregion private methods
     }

@@ -1,5 +1,5 @@
-﻿<tests path="C:\Dev\eO\trunk\Lib\bin\Test">
-  <test name="Validator Simulator Test" description="Validates the datasets inserted to the database by the ValidatorSimulator."
+﻿<tests path="D:\dev\personal\TestRunner\TestBin">
+  <!--<test name="Validator Simulator Test" description="Validates the datasets inserted to the database by the ValidatorSimulator."
         path="${path}" fileName="eO.Lib.Test.Integration.Business.Manager.ValidatorSimulatorManager.dll"
         typeName="eO.Lib.Test.Integration.Business.Manager.ValidatorSimulatorManager.Test"
         repeatCount="1">
@@ -14,8 +14,8 @@
     <dependency name="AgencyName" value="UTA" />
     <dependency name="HotlistStartSequenceNumber" value="0" />
     <dependency name="ColdlistStartSequenceNumber" value="0" />
-  </test>  
-  <test name="Comparator Validator Test" description="Validates the results of the Comparitor Manager against a direct database call."
+  </test>-->  
+  <!--<test name="Comparator Validator Test" description="Validates the results of the Comparitor Manager against a direct database call."
         path="${path}" fileName="eO.Lib.Test.System.Business.Manager.ComparatorAutomation.ComparatorTester.dll"
         typeName="eO.Lib.Test.System.Business.Manager.ComparatorAutomation.ComparatorTester.ComparatorValidator"
         repeatCount="1">
@@ -23,7 +23,7 @@
     <dependency path="${path}" name="eO.Lib.Business.Manager" extension="dll" typeName="eO.Lib.Business.Manager.Comparator.ComparatorManager" />
     <dependency name="institutionName" value="UTA" />
     <dependency name="nameSpace" value="UTA/nameSpaceValue" />
-  </test>  
+  </test>-->  
   <!--<test name="Round Trip Client Call" description="The client calls the WCF Service which in turn calls the Web Service, and updates portions of the passed string at each level to prove that each level of the call was made."
         path="${path}" fileName="RoundTripClientCall.dll" typeName="RoundTripClientCall.ServiceRunner" repeatCount="10" />  
   <test name="Sleep Test" description="Sleeps for random time sets. This is a demo test for the test harness tool."
@@ -34,13 +34,13 @@
     <dependency name="SERVER_NAME" value="SALTQA" />
     <dependency name="PASSWORD" value="temple#1100" />
   </test>-->
-  <test path="C:\Dev\Test\TestRunner\SleepTest\bin\Debug" fileName="SleepTest.dll" typeName="SleepTest.Class1" 
+  <test name="Sleep1" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1" 
         repeatCount="10"/>
-  <test path="C:\Dev\Test\TestRunner\SleepTest\bin\Debug" fileName="SleepTest.dll" typeName="SleepTest.Class1"
+  <test name="Sleep2" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1"
         repeatCount="10"/>
-  <test path="C:\Dev\Test\TestRunner\SleepTest\bin\Debug" fileName="SleepTest.dll" typeName="SleepTest.Class1"
+  <test name="Sleep3" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1"
         repeatCount="10"/>
-  <test path="C:\Dev\Test\TestRunner\SleepTest\bin\Debug" fileName="SleepTest.dll" typeName="SleepTest.Class1"
+  <test name="Sleep4" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1"
         repeatCount="10"/>  
   <!--
   Sample Test section

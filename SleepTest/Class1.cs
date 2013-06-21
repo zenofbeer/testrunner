@@ -46,17 +46,19 @@ namespace SleepTest
 
         public void ExecuteTest()
         {
-            //_harness.SetConsoleTitle("Sleeper Test");
-            //for (int i = 0; i < _primaryIteratorCount; i++)
-            //{                
-            //    _harness.SetTestStatus(TestResult.StatusUnknown);
-            //    var random = new Random();
-            //    int sleepTime = random.Next(5000);
-            //    _harness.WriteStatus(string.Format("Sleeping for {0} milliseconds", sleepTime.ToString()));
-            //    System.Threading.Thread.Sleep(sleepTime);
-            //}
+            _harness.SetConsoleTitle("Sleeper Test");
+            for (int i = 0; i < _primaryIteratorCount; i++)
+            {
+                _harness.CurrentTestStatus = "Current Status";
+                _harness.CurrentTestResult = "Current Test Result";
+                _harness.SetStatusMessage(TestResult.StatusUnknown.ToString());
+                var random = new Random();
+                int sleepTime = random.Next(5000);
+                _harness.SetStatusMessage(string.Format("Sleeping for {0} milliseconds", sleepTime.ToString()));
+                System.Threading.Thread.Sleep(sleepTime);
+            }
 
-            //_harness.SetTestStatus(TestResult.StatusSuccess);
+            _harness.SetStatusMessage(TestResult.StatusSuccess.ToString());
         }
     }
 }
