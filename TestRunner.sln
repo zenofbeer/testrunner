@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SleepTest", "SleepTest\Slee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunnerW32", "TestRunnerW32\TestRunnerW32.csproj", "{982D7225-CACB-405F-8CCD-923A1A84708A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunner", "TestRunner\TestRunner.csproj", "{C57E56BE-0678-46B8-AB90-538511B2FA59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{982D7225-CACB-405F-8CCD-923A1A84708A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{982D7225-CACB-405F-8CCD-923A1A84708A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{982D7225-CACB-405F-8CCD-923A1A84708A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57E56BE-0678-46B8-AB90-538511B2FA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57E56BE-0678-46B8-AB90-538511B2FA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57E56BE-0678-46B8-AB90-538511B2FA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57E56BE-0678-46B8-AB90-538511B2FA59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

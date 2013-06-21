@@ -49,8 +49,8 @@ namespace SleepTest
             _harness.SetConsoleTitle("Sleeper Test");
             for (int i = 0; i < _primaryIteratorCount; i++)
             {
-                _harness.CurrentTestStatus = "Current Status";
-                _harness.CurrentTestResult = "Current Test Result";
+                //_harness.CurrentTestStatus = "Current Status";
+                //_harness.CurrentTestResult = "Current Test Result";
                 _harness.SetStatusMessage(TestResult.StatusUnknown.ToString());
                 var random = new Random();
                 int sleepTime = random.Next(5000);
@@ -59,6 +59,7 @@ namespace SleepTest
             }
 
             _harness.SetStatusMessage(TestResult.StatusSuccess.ToString());
+            _harness.SetTestResults(TestResult.StatusSuccess);
         }
     }
 }

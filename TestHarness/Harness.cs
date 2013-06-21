@@ -194,13 +194,17 @@ namespace net.PaulChristensen.TestHarnessLib
                 _writer = new StreamWriter("./Log/" + fileName + ".log");
 
                 string logDir = Directory.GetCurrentDirectory() + "/Log/";
-                _iW32Console.SetLogFilePath(logDir + fileName + ".log");
+                if(null != _iW32Console)
+                    _iW32Console.SetLogFilePath(logDir + fileName + ".log");
 
                 _currentTestRunStatus = TestRunStatus.StatusTestPreparing;
-                SetStatusMessage("Preparing to run next test...");                
-                
-                _iW32Console.CurrentTestResults = GetStatusString();
-                _iW32Console.CurrentTestId = i.ToString();
+                SetStatusMessage("Preparing to run next test...");
+
+                if (null != _iW32Console)
+                {
+                    _iW32Console.CurrentTestResults = GetStatusString();
+                    _iW32Console.CurrentTestId = i.ToString();
+                }
                 CurrentTestCountString = (i + 1).ToString();
                 CurrentTestName = _currentTest.TestName;                
 
@@ -357,7 +361,8 @@ namespace net.PaulChristensen.TestHarnessLib
         public void SetTestResults(TestResult status)
         {
             _currentTestStatus = status;
-            _iW32Console.CurrentTestResults = GetStatusString();
+            if(null != _iW32Console)
+                _iW32Console.CurrentTestResults = GetStatusString();
         }
 
         public void AddTestToQue(ITest iTest)
