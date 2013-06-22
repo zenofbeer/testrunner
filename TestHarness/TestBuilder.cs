@@ -31,12 +31,14 @@ namespace net.PaulChristensen.TestHarnessLib
     {
         private readonly Stack<Dictionary<string, string>> _testProperties;
         private readonly Dictionary<string, string> _testDependancies;
+        private readonly Dictionary<string, ITest> _allTests; 
         private readonly ITestSuiteRepository _testSuiteRepository;
         private readonly XDocument _xDoc;
         private XElement _nextElement;
         private readonly int _testCount;
         private readonly AppDomain _currentDomain;
 
+        //ToDo: clean this up so it's not calling the data source directly. 
         public TestBuilder()
         {
             _currentDomain = AppDomain.CurrentDomain;
@@ -46,15 +48,27 @@ namespace net.PaulChristensen.TestHarnessLib
             _testProperties = new Stack<Dictionary<string, string>>();
             _testDependancies = new Dictionary<string, string>();
             _xDoc = XDocument.Load("HarnessConfig.xml");
-            //ToDo: inject this
+            //ToDo: inject this and create a manager for data requests
             _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
 
             SourceTestBatch = new TestEntities();
             var globalProperties = ProcessTestHeader();
             SourceTestBatch.SuiteProperties = globalProperties;
             _testProperties.Push(globalProperties);
+            _nextElement = _xDoc.Element("tests").Element("test");
+            _testCount = _testSuiteRepository.GetTestCount();
+        }
 
-            _testCount = new List<XElement>(_xDoc.Descendants("test")).Count;
+        public Dictionary<string, ITest> LoadAllTests(IHarness harness)
+        {
+            var testSet = new Dictionary<string, ITest>();
+            for (var i = 0; i < _testCount; i++)
+            {
+                ITest test;
+                GetNextTest(out test, harness);
+                testSet.Add(test.TestName, test);
+            }
+            return testSet;
         }
 
         public int TestCount
@@ -252,13 +266,14 @@ namespace net.PaulChristensen.TestHarnessLib
             }
         }        
 
-        //ToDo: Make this return the Dictionary and set the suiteProperties set the properties from the return value, and push the test properties on to the stack from here.
+        /// <summary>
+        /// Get Test Suite global propeties
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, string> ProcessTestHeader()
         {
             var suiteProperties = _testSuiteRepository.GetTestSuiteDefinition();
 
-            //ToDo: remove this line when no longer necessary.
-            _nextElement = _xDoc.Element("tests").Element("test");
             return suiteProperties;
         }
 

@@ -13,6 +13,6 @@ namespace net.PaulChristensen.TestRunnerDataLink.Repositories
         /// get the test definition containing test suite global properties
         /// </summary>
         /// <returns></returns>
-        Dictionary<string, string> GetTestSuiteDefinition();
+        Dictionary<string, string> GetTestSuiteDefinition(); 
     }
 }

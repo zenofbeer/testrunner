@@ -168,13 +168,7 @@ namespace net.PaulChristensen.TestHarnessLib
 
         private void LoadAllTests()
         {
-            _availableTests = new Dictionary<string, ITest>();
-            for (int i = 0; i < _testCount; i++)
-            {
-                _testBatch.GetNextTest(out _currentTest, this);
-                ITest iTest = _currentTest;
-                _availableTests.Add(iTest.TestName, iTest);
-            }
+            _availableTests = _testBatch.LoadAllTests(this);
         }
 
         private void ExecuteTests()
