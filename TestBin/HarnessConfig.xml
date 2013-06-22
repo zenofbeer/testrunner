@@ -34,8 +34,9 @@
     <dependency name="SERVER_NAME" value="SALTQA" />
     <dependency name="PASSWORD" value="temple#1100" />
   </test>-->
-  <test name="Sleep1" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1" 
-        repeatCount="10"/>
+  <test name="Sleep1" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1" repeatCount="10">
+    <dependency name="dependencyA" dbuserName="sa" dbPassword="password2" />
+  </test>
   <test name="Sleep2" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1"
         repeatCount="10"/>
   <test name="Sleep3" path="${path}" fileName="SleepTest.dll" typeName="SleepTest.Class1"

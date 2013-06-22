@@ -22,7 +22,6 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
             ProcessDependencyElements(testElement.Elements(Constants.ElementDependency), testProperties);
         }
 
-        #region public properties
         /// <summary>
         /// The test name.
         /// </summary>
@@ -62,9 +61,7 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
         /// dictionary representing test library dependencies.
         /// </summary>
         public List<TestDependencyEntity> Dependencies { get; private set; }
-        #endregion public properties
 
-        #region private methods
         private void ProcessTestElement(IEnumerable<XAttribute> attributes, IDictionary<string, string> testProperties)
         {
             var newAttributeCollection = new Dictionary<string, string>();
@@ -72,7 +69,14 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
             foreach (var attribute in attributes)
             {
                 if (StringHelper.IsVariable(attribute.Value))
-                    ProcessVariableAttribute(attribute, testProperties);
+                {
+                    var tempAttribute = attribute;
+                    ProcessVariableAttribute(ref tempAttribute, testProperties);
+                    attribute.Value = tempAttribute.Value;
+                }
+
+                if (attribute.Name == Constants.TestPathAttribute)
+                    Path = attribute.Value;
                 else if (attribute.Name == Constants.TestNameAttribute)
                     TestName = attribute.Value;
                 else if (attribute.Name == Constants.TestDescriptionAttribute)
@@ -93,20 +97,18 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
             }
         }
 
-        private void ProcessVariableAttribute(XAttribute attribute, IDictionary<string, string> testProperties)
+        /// <summary>
+        /// Parse the variable and set the attribute to the value that has been set for the variable
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="testProperties"></param>
+        private void ProcessVariableAttribute(ref XAttribute attribute, IDictionary<string, string> testProperties)
         {
             string tempValue = attribute.Value;
             StringHelper.StripVariableDelimiters(ref tempValue);
-            StringHelper.TrimLeadingSlashes(ref tempValue);
-            if (attribute.Name.ToString() == Constants.TestPathAttribute)
-            {
-                if (tempValue.Length > 0)
-                {
-                    StringHelper.TrimTrailingSlashes(ref tempValue);
-                }
-                Path = testProperties[Constants.TestPathAttribute] + tempValue; 
-            }                       
+            tempValue = testProperties[tempValue];
+            StringHelper.TrimTrailingSlashes(ref tempValue);
+            attribute.Value = tempValue;                    
         }
-        #endregion private methods
     }
 }

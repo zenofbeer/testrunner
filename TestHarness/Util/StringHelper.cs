@@ -1,12 +1,11 @@
+using System;
 using System.Text.RegularExpressions;
 
 namespace net.PaulChristensen.TestHarnessLib.Util
 {
     public static class StringHelper
     {
-        #region constants
         private const string VariableSearchPattern = "\\${[A-Za-z0-9]*}";
-        #endregion constants
 
         /// <summary>
         /// check to see if the value is a variable
@@ -30,8 +29,12 @@ namespace net.PaulChristensen.TestHarnessLib.Util
         /// <param name="value"></param>
         public static void StripVariableDelimiters(ref string value)
         {
-            var regex = new Regex(VariableSearchPattern);
-            value = regex.Replace(value, string.Empty);
+            if (!IsVariable(value))
+            {
+                throw new ApplicationException("Value is not a variable");
+            }
+            value = value.Substring(2);
+            value = value.Substring(0, value.Length - 1);
         }
 
         /// <summary>

@@ -166,7 +166,6 @@ namespace net.PaulChristensen.TestHarnessLib
                     string tempValue = attribute.Value;
                     if(StringHelper.IsVariable(tempValue))
                     {
-                        //tempValue = regex.Replace(tempValue, "").TrimStart('\\');
                         StringHelper.StripVariableDelimiters(ref tempValue);
                         StringHelper.TrimTrailingSlashes(ref tempValue);
                         if (attribute.Name.ToString() == "path")

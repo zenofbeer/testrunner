@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:properties="clr-namespace:net.PaulChristensen.TestRunnerW32.Properties"        
     Height="427" 
-    Width="737"
+    Width="1138"
     Title="Main Test Runner"
     xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
     x:Name="MainTestRunner"
@@ -84,7 +84,7 @@
                     <GridViewColumn Width="200" Header="{x:Static properties:Resource.TestStatusColumnHeaderText}"
                                     DisplayMemberBinding="{Binding CurrentTestStatus}" />
                     <GridViewColumn Width="300" Header="{x:Static properties:Resource.TestResultsColumnHeaderText}"
-                                    DisplayMemberBinding="{Binding CurrentTestResults}" />                    
+                                    DisplayMemberBinding="{Binding CurrentTestResults}" />
                 </GridView>
             </ListView.View>
         </ListView>

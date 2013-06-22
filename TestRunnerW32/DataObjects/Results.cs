@@ -8,11 +8,8 @@ namespace net.PaulChristensen.TestRunnerW32.DataObjects
 {
     internal class Results : ObservableCollectionBase<Result>
     {
-        #region constructors
         public Results():base()
         {
         }
-
-        #endregion constructors
     }
 }
