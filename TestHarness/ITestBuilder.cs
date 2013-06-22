@@ -26,6 +26,11 @@ namespace net.PaulChristensen.TestHarnessLib
     {
         bool GetNextTest(out ITest test, IHarness harness);
         int TestCount { get; }
+        /// <summary>
+        /// Load all test objects in to memory
+        /// </summary>
+        /// <param name="harness"></param>
+        /// <returns></returns>
         Dictionary<string, ITest> LoadAllTests(IHarness harness);
     }
 }
