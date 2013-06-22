@@ -48,9 +48,11 @@ namespace net.PaulChristensen.TestHarnessLib
             _xDoc = XDocument.Load("HarnessConfig.xml");
             //ToDo: inject this
             _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
-            SourceTestBatch = new TestEntities();
 
-            ProcessTestHeader();
+            SourceTestBatch = new TestEntities();
+            var globalProperties = ProcessTestHeader();
+            SourceTestBatch.SuiteProperties = globalProperties;
+            _testProperties.Push(globalProperties);
 
             _testCount = new List<XElement>(_xDoc.Descendants("test")).Count;
         }
@@ -250,15 +252,14 @@ namespace net.PaulChristensen.TestHarnessLib
             }
         }        
 
-        //ToDo: Make this return the Dictionary and set the suiteProperties set the properties from the return value;
-        private void ProcessTestHeader()
+        //ToDo: Make this return the Dictionary and set the suiteProperties set the properties from the return value, and push the test properties on to the stack from here.
+        private Dictionary<string, string> ProcessTestHeader()
         {
             var suiteProperties = _testSuiteRepository.GetTestSuiteDefinition();
 
-            SourceTestBatch.SuiteProperties = suiteProperties;
-
-            _testProperties.Push(suiteProperties);
+            //ToDo: remove this line when no longer necessary.
             _nextElement = _xDoc.Element("tests").Element("test");
+            return suiteProperties;
         }
 
         private static Assembly ResolveEventHandler(object sender, ResolveEventArgs e)
