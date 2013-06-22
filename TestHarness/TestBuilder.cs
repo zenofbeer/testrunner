@@ -250,26 +250,13 @@ namespace net.PaulChristensen.TestHarnessLib
             }
         }        
 
+        //ToDo: Make this return the Dictionary and set the suiteProperties set the properties from the return value;
         private void ProcessTestHeader()
         {
             var suiteProperties = _testSuiteRepository.GetTestSuiteDefinition();
 
+            SourceTestBatch.SuiteProperties = suiteProperties;
 
-            //IEnumerable<XAttribute> attributeCollection = _xDoc.Element("tests").Attributes();
-            //var currentAttributeCollection = new Dictionary<string, string>();
-
-            //foreach (XAttribute attribute in attributeCollection)
-            //{
-            //    string tempString = attribute.Value;
-            //    if (attribute.Name.ToString() == "path")
-            //    {
-            //        tempString = tempString.TrimEnd('\\') + '\\';
-            //        SourceTestBatch.Path = tempString;
-            //    }
-            //    currentAttributeCollection[attribute.Name.ToString()] = tempString;                
-            //}
-            //ToDo: remove this line, and just grab it when I need it. 
-            SourceTestBatch.Path = suiteProperties["path"];
             _testProperties.Push(suiteProperties);
             _nextElement = _xDoc.Element("tests").Element("test");
         }

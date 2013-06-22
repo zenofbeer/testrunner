@@ -4,7 +4,7 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
 {
     public class TestEntities
     {
-        public string Path { get; set; }
+        public Dictionary<string, string> SuiteProperties { get; set; } 
         public List<TestEntity> TestEntityList { get; set; }
     }
 }
