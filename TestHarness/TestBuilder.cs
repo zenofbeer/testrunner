@@ -23,6 +23,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using net.PaulChristensen.TestHarnessLib.Entities;
 using net.PaulChristensen.TestHarnessLib.Util;
+using net.PaulChristensen.TestRunnerDataLink.Repositories;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
@@ -30,7 +31,7 @@ namespace net.PaulChristensen.TestHarnessLib
     {
         private readonly Stack<Dictionary<string, string>> _testProperties;
         private readonly Dictionary<string, string> _testDependancies;
-        //private readonly ITestSuiteRepository _testSuiteRepository;
+        private readonly ITestSuiteRepository _testSuiteRepository;
         private readonly XDocument _xDoc;
         private XElement _nextElement;
         private readonly int _testCount;
@@ -46,7 +47,7 @@ namespace net.PaulChristensen.TestHarnessLib
             _testDependancies = new Dictionary<string, string>();
             _xDoc = XDocument.Load("HarnessConfig.xml");
             //ToDo: inject this
-            //_testSuiteRepository = new XmlTestSuiteRepositoryRepository();
+            _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
             SourceTestBatch = new TestEntities();
 
             ProcessTestHeader();
@@ -251,21 +252,25 @@ namespace net.PaulChristensen.TestHarnessLib
 
         private void ProcessTestHeader()
         {
-            IEnumerable<XAttribute> attributeCollection = _xDoc.Element("tests").Attributes();
-            var currentAttributeCollection = new Dictionary<string, string>();
+            var suiteProperties = _testSuiteRepository.GetTestSuiteDefinition();
 
-            foreach (XAttribute attribute in attributeCollection)
-            {
-                string tempString = attribute.Value;
-                if (attribute.Name.ToString() == "path")
-                {
-                    tempString = tempString.TrimEnd('\\') + '\\';
-                    SourceTestBatch.Path = tempString;
-                }
-                currentAttributeCollection[attribute.Name.ToString()] = tempString;                
-            }
 
-            _testProperties.Push(currentAttributeCollection);
+            //IEnumerable<XAttribute> attributeCollection = _xDoc.Element("tests").Attributes();
+            //var currentAttributeCollection = new Dictionary<string, string>();
+
+            //foreach (XAttribute attribute in attributeCollection)
+            //{
+            //    string tempString = attribute.Value;
+            //    if (attribute.Name.ToString() == "path")
+            //    {
+            //        tempString = tempString.TrimEnd('\\') + '\\';
+            //        SourceTestBatch.Path = tempString;
+            //    }
+            //    currentAttributeCollection[attribute.Name.ToString()] = tempString;                
+            //}
+            //ToDo: remove this line, and just grab it when I need it. 
+            SourceTestBatch.Path = suiteProperties["path"];
+            _testProperties.Push(suiteProperties);
             _nextElement = _xDoc.Element("tests").Element("test");
         }
 

@@ -11,11 +11,6 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
     /// </summary>
     public class TestEntity
     {
-        #region private constants
-        #endregion private constants
-        #region private fields
-        #endregion private fields
-
         public TestEntity(XElement testElement, Dictionary<string, string> testProperties)
         {
             ProcessTestElement(testElement.Attributes(), testProperties);
