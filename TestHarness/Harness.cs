@@ -77,7 +77,6 @@ namespace net.PaulChristensen.TestHarnessLib
             Console.ReadLine();
         }
 
-        #region properties
         /// <summary>
         /// Sets the test title value.
         /// </summary>
@@ -154,7 +153,6 @@ namespace net.PaulChristensen.TestHarnessLib
             if (null != _iW32Console)
                 _iW32Console.CurrentTestName = CurrentTestName;
         }
-        #endregion properties
 
         private void InitializeHarness()
         {
@@ -278,7 +276,6 @@ namespace net.PaulChristensen.TestHarnessLib
             return resultString;
         }
 
-        #region Implementation of IHarness
         public void SetStatusMessage(string statusMessage)
         {
             if (null != _iW32Console)
@@ -408,11 +405,7 @@ namespace net.PaulChristensen.TestHarnessLib
             }
             return details;
         }
-        #endregion Implementation of IHarness
-
-        #region event handlers
         
-        #region view event handlers
         public void ExecuteButton_Click(object sender, EventArgs e)
         {
             ExecuteTests();
@@ -422,7 +415,6 @@ namespace net.PaulChristensen.TestHarnessLib
         {
             _queuedTests.Clear();
         }
-        #endregion view event handlers
 
         private static Assembly ResolveEventHandler(object sender, ResolveEventArgs e)
         {
@@ -461,9 +453,6 @@ namespace net.PaulChristensen.TestHarnessLib
             }
             return retVal;
         }
-        #endregion event handlers
-
-        #region IHarness Members
 
 
         public string CurrentTestStatus
@@ -478,11 +467,6 @@ namespace net.PaulChristensen.TestHarnessLib
             }
         }
 
-        #endregion
-
-        #region IHarness Members
-
-
         public string CurrentTestResult
         {
             get
@@ -494,7 +478,5 @@ namespace net.PaulChristensen.TestHarnessLib
                 throw new NotImplementedException();
             }
         }
-
-        #endregion
     }
 }
