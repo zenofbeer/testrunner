@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="net.PaulChristensen.TestHarnessLib.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PathKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">path</Value>
+    </Setting>
+    <Setting Name="FileNameKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">fileName</Value>
+    </Setting>
+    <Setting Name="TypeNameKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">typeName</Value>
+    </Setting>
+    <Setting Name="RepeatCountKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">repeatCount</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

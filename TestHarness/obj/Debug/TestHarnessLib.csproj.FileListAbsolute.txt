@@ -14,3 +14,4 @@ D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestHarnessLib.pdb
 D:\dev\personal\TestRunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.dll
 D:\dev\personal\TestRunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.pdb
 D:\dev\personal\TestRunner\TestHarness\obj\Debug\TestHarnessLib.csprojResolveAssemblyReference.cache
+D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestHarnessLib.dll.config

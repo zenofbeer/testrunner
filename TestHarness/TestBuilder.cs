@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using net.PaulChristensen.TestHarnessLib.Entities;
 using net.PaulChristensen.TestHarnessLib.Util;
@@ -29,15 +28,13 @@ namespace net.PaulChristensen.TestHarnessLib
 {
     internal class TestBuilder : ITestBuilder
     {
-        #region private fields
         private readonly Stack<Dictionary<string, string>> _testProperties;
         private readonly Dictionary<string, string> _testDependancies;
+        //private readonly ITestSuiteRepository _testSuiteRepository;
         private readonly XDocument _xDoc;
         private XElement _nextElement;
         private readonly int _testCount;
         private readonly AppDomain _currentDomain;
-
-        #endregion private fields
 
         public TestBuilder()
         {
@@ -48,15 +45,15 @@ namespace net.PaulChristensen.TestHarnessLib
             _testProperties = new Stack<Dictionary<string, string>>();
             _testDependancies = new Dictionary<string, string>();
             _xDoc = XDocument.Load("HarnessConfig.xml");
+            //ToDo: inject this
+            //_testSuiteRepository = new XmlTestSuiteRepositoryRepository();
             SourceTestBatch = new TestEntities();
 
             ProcessTestHeader();
 
-            var items = _xDoc.Descendants("test");
             _testCount = new List<XElement>(_xDoc.Descendants("test")).Count;
         }
 
-        #region properties
         public int TestCount
         {
             get { return _testCount; }
@@ -68,9 +65,10 @@ namespace net.PaulChristensen.TestHarnessLib
         {
             get
             {
-                string path = _testProperties.Peek()["path"];
-                path = path.TrimEnd('\\') + '\\';
-                return path + _testProperties.Peek()["fileName"];
+                var path = _testProperties.Peek()[Properties.Settings.Default.PathKey];
+                StringHelper.TrimTrailingSlashes(ref path);
+                path = path + '\\';
+                return path + _testProperties.Peek()[Properties.Settings.Default.FileNameKey];
             }
         }
 
@@ -78,7 +76,7 @@ namespace net.PaulChristensen.TestHarnessLib
         {
             get
             {
-                return _testProperties.Peek()["typeName"];
+                return _testProperties.Peek()[Properties.Settings.Default.TypeNameKey];
             }
         }
 
@@ -87,14 +85,13 @@ namespace net.PaulChristensen.TestHarnessLib
             get
             {
                 int repeatCount = 0;
-                if (_testProperties.Peek().ContainsKey("repeatCount"))
+                if (_testProperties.Peek().ContainsKey(Properties.Settings.Default.RepeatCountKey))
                 {                    
-                    int.TryParse(_testProperties.Peek()["repeatCount"], out repeatCount);
+                    int.TryParse(_testProperties.Peek()[Properties.Settings.Default.RepeatCountKey], out repeatCount);
                 }
                 return repeatCount;
             }
         }
-        #endregion properties
 
         public bool GetNextTest(out ITest test, IHarness harness)
         {            
@@ -272,7 +269,6 @@ namespace net.PaulChristensen.TestHarnessLib
             _nextElement = _xDoc.Element("tests").Element("test");
         }
 
-        #region event handlers
         private static Assembly ResolveEventHandler(object sender, ResolveEventArgs e)
         {
             string assemblyToFind = e.Name.Substring(0, e.Name.IndexOf(','));
@@ -289,6 +285,5 @@ namespace net.PaulChristensen.TestHarnessLib
             }
             return retVal;
         }
-        #endregion event handlers
     }
 }
