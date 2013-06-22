@@ -1,0 +1,97 @@
+# Visual Studio specific stuff
+[Oo]bj/
+[Bb]in/
+[Tt]est[Rr]esult*
+*.suo
+*.user
+*.[Cc]ache
+*.bak
+*.log
+*.crunch*
+*.orig
+
+# Nuget packages
+#At Expedia we WANT to check in the packages for the time being /[Pp]ackages/
+![Pp]ackages/repositories.config
+
+# Build folders
+[Bb]uild/
+[Bb]uilds/
+[Dd]eploy/
+[Pp]ublish/
+[Dd]ebug*/
+[Rr]elease*/
+
+# Resharper
+_ReSharper.*/
+*/*.dotCover/*
+
+# MS Office temp files
+~$*
+
+# OS Junk files
+[Tt]humbs.db
+*.DS_Store
+
+# In case we are sharing the repo with SVN
+*.svn
+.svn
+.svn/
+Ankh.NoLoad
+
+# In case we are sharing the repo with TFS or Source Safe
+*.vspscc
+*.vssscc
+*.vscc
+*.scc
+
+# In case we are sharing the repo with Mercurial
+/.hg/
+.hgignore
+
+# In case we are sharing the repo with Veracity
+/.vv/
+.vvignores
+
+# SublimeText project files
+*.sublime-project
+*.sublime-workspace
+
+# Expedia specific
+web/EndCall/
+web/Logs/
+
+# Recorded test data
+web/TestData/
+
+# Ignore build related files
+_buildver.txt
+
+# Ignore java eclipse settings
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific git ignore
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch

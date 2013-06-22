@@ -35,7 +35,6 @@ namespace net.PaulChristensen.TestRunnerW32
     /// </summary>
     public partial class Runner : Window, IW32Console, INotifyPropertyChanged
     {
-        #region private fields
         private readonly IHarness _iHarness;
         private readonly Results _results;
         private Result _currentResult;
@@ -49,16 +48,16 @@ namespace net.PaulChristensen.TestRunnerW32
         private string _runTestCountString;
         private string _currentTestCountString;
         private int _runTestCountHolder;
+        private double _suiteProgressPercent;
         private string _testTitle;
-        #endregion private fields
 
-        #region initialization
         public Runner()
         {
             InitializeComponent();
             PopulateButtonList();
             RunTestCountString = "0";
             CurrentTestCountString = "0";
+            _suiteProgressPercent = 0;
             _availableTests = new AvailableTests();
             _iHarness = new Harness(this);
             _results = new Results();
@@ -93,9 +92,7 @@ namespace net.PaulChristensen.TestRunnerW32
                                                    ));
             }
         }
-        #endregion initialization
 
-        #region properties
         public string CurrentTestId
         {
             get { return _currentResult.CurrentTestId; }
@@ -118,6 +115,16 @@ namespace net.PaulChristensen.TestRunnerW32
         {
             get { return _currentResult.CurrentTestResults; }
             set { _currentResult.CurrentTestResults = value; }
+        }
+
+        public double SuiteProgressPercent
+        {
+            get { return _suiteProgressPercent; }
+            set 
+            { 
+                _suiteProgressPercent = value;
+                PropertyChangedHandler("SuiteProgressPercent");
+            }
         }
 
         public string TestCountString
@@ -160,11 +167,10 @@ namespace net.PaulChristensen.TestRunnerW32
                 PropertyChangedHandler("TestTitle");
             }
         }
-        #endregion properties
 
-        #region public methods
         public void BeginNewTest()
         {
+            UpdateSuiteProgressValue();
             _currentResult = new Result();
             _results.Add(_currentResult);
         }
@@ -178,9 +184,7 @@ namespace net.PaulChristensen.TestRunnerW32
         {
             _logFileName.Add(logFilePath);
         }
-        #endregion public methods
 
-        #region private methods
         private void HarnessThread(object sender, RoutedEventArgs e)
         {
             _iHarness.ExecuteButton_Click(sender, (EventArgs) e);
@@ -204,9 +208,6 @@ namespace net.PaulChristensen.TestRunnerW32
             } while (current != null);
             return null;
         }
-        #endregion private methods
-
-        #region implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -215,7 +216,6 @@ namespace net.PaulChristensen.TestRunnerW32
             if (null != PropertyChanged)
                 PropertyChanged(this, new PropertyChangedEventArgs(sender));
         }
-        #endregion implementation of INotifyPropertyChanged
 
         private void ClearQueButton_Click(object sender, RoutedEventArgs e)
         {
@@ -312,6 +312,17 @@ namespace net.PaulChristensen.TestRunnerW32
         private void SaveSuiteButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not Yet Implemented. This will save the set of queued tests to a configuration file for future executions.");
+        }
+
+        private void UpdateSuiteProgressValue()
+        {
+            double currentTestCount;            
+            double.TryParse(CurrentTestCountString, out currentTestCount);
+            currentTestCount++;
+            double totalTestCount;
+            double.TryParse(TestCountString, out totalTestCount);
+            var result = (currentTestCount/totalTestCount)*100;
+            SuiteProgressPercent = result;
         }
     }
 }

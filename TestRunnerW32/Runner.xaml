@@ -84,7 +84,7 @@
                     <GridViewColumn Width="200" Header="{x:Static properties:Resource.TestStatusColumnHeaderText}"
                                     DisplayMemberBinding="{Binding CurrentTestStatus}" />
                     <GridViewColumn Width="300" Header="{x:Static properties:Resource.TestResultsColumnHeaderText}"
-                                    DisplayMemberBinding="{Binding CurrentTestResults}" />
+                                    DisplayMemberBinding="{Binding CurrentTestResults}" />                    
                 </GridView>
             </ListView.View>
         </ListView>
@@ -99,6 +99,9 @@
             <TextBlock Text=" Of " />
             <TextBlock Text="{Binding Path=RunTestCountString}" />
             <Separator />
+            <StatusBarItem HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <ProgressBar Name="ProgSuiteProgress" Value="{Binding SuiteProgressPercent, UpdateSourceTrigger=PropertyChanged}" />
+            </StatusBarItem>            
         </StatusBar>
     </Grid>
 </Window>

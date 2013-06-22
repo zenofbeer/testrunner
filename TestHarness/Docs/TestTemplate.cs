@@ -24,9 +24,7 @@ namespace net.PaulChristensen.TestHarnessLib
 {
     public class TestTemplate : ITest
     {
-        #region constants
         private string _testName = "Sample Sleeper Test.";
-        #endregion constants
 
         #region private fields
         /// <summary>
