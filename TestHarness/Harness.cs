@@ -27,7 +27,7 @@ namespace net.PaulChristensen.TestHarnessLib
     public class Harness : IHarness
     {
         #region private fields
-        private ITestBuilder _testBatch;
+        private ITestBuilder _testBuilder;
         private ITest _currentTest;
         private TestResult _currentTestStatus = TestResult.StatusUnknown;
         private TestRunStatus _currentTestRunStatus;
@@ -53,7 +53,8 @@ namespace net.PaulChristensen.TestHarnessLib
         {
             _iW32Console = iW32Console;
             InitializeHarness();
-            LoadAllTests();
+            _availableTests = _testBuilder.LoadAllTests(this);
+            
             foreach (var availableTest in _availableTests.Values)
                 _iW32Console.AddAvailableTest(availableTest);
         }
@@ -62,8 +63,8 @@ namespace net.PaulChristensen.TestHarnessLib
         {
             InitializeHarness();
             Console.CursorVisible = false;
-
-            LoadAllTests();
+            _availableTests = _testBuilder.LoadAllTests(this);
+            
             foreach (var availableTest in _availableTests.Values)
             {
                 _queuedTests.Add(_queuedTests.Count, availableTest);
@@ -160,15 +161,10 @@ namespace net.PaulChristensen.TestHarnessLib
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);
             currentDomain.SetData("Harness", this);
-            _testBatch = new TestBuilder();
-            _testCount = _testBatch.TestCount;
+            _testBuilder = new TestBuilder();
+            _testCount = _testBuilder.TestCount;
             TestCountString = _testCount.ToString();
             _queuedTests = new Dictionary<int, ITest>();
-        }
-
-        private void LoadAllTests()
-        {
-            _availableTests = _testBatch.LoadAllTests(this);
         }
 
         private void ExecuteTests()
