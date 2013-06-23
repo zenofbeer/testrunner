@@ -21,6 +21,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using net.PaulChristensen.TestRunnerDataLink.Managers;
+using net.PaulChristensen.TestRunnerDataLink.Repositories;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
@@ -52,16 +54,16 @@ namespace net.PaulChristensen.TestHarnessLib
         public Harness(IW32Console iW32Console)
         {
             _iW32Console = iW32Console;
-            InitializeHarness();
+            InitializeHarness(null);
             _availableTests = _testBuilder.LoadAllTests(this);
             
             foreach (var availableTest in _availableTests.Values)
                 _iW32Console.AddAvailableTest(availableTest);
         }
 
-        public Harness()
+        public Harness(ITestBuilderManager manager)
         {
-            InitializeHarness();
+            InitializeHarness(manager);
             Console.CursorVisible = false;
             _availableTests = _testBuilder.LoadAllTests(this);
             
@@ -154,12 +156,12 @@ namespace net.PaulChristensen.TestHarnessLib
                 _iW32Console.CurrentTestName = CurrentTestName;
         }
 
-        private void InitializeHarness()
+        private void InitializeHarness(ITestBuilderManager manager)
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);
             currentDomain.SetData("Harness", this);
-            _testBuilder = new TestBuilder();
+            _testBuilder = new TestBuilder(manager);
             _testCount = _testBuilder.TestCount;
             TestCountString = _testCount.ToString();
             _queuedTests = new Dictionary<int, ITest>();

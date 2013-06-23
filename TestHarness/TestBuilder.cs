@@ -22,28 +22,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
-using net.PaulChristensen.TestRunnerDataLink.Repositories;
+using net.PaulChristensen.TestRunnerDataLink.Managers;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
     internal class TestBuilder : ITestBuilder
     {
-        private readonly ITestSuiteRepository _testSuiteRepository;
+        private readonly ITestBuilderManager _testSuiteRepository;
         private XElement _nextElement;
         private readonly AppDomain _currentDomain;
 
-        //ToDo: clean this up so it's not calling the data source directly. 
-        public TestBuilder()
+        public TestBuilder(ITestBuilderManager manager)
         {
             _currentDomain = AppDomain.CurrentDomain;
             _currentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);
 
-            //ToDo: inject this and create a manager for data requests
-            _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
+            _testSuiteRepository = manager;
 
             SourceTestBatch = _testSuiteRepository.GetTestSuite(1);
-            var globalProperties = ProcessTestHeader();
-            SourceTestBatch.SuiteProperties = globalProperties;
             TestCount = _testSuiteRepository.GetTestCount();
         }
 
@@ -115,17 +111,6 @@ namespace net.PaulChristensen.TestHarnessLib
                     tempTestDependency.Add("typeName", dependencyList);
             }
         }       
-
-        /// <summary>
-        /// Get Test Suite global propeties
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<string, string> ProcessTestHeader()
-        {
-            var suiteProperties = _testSuiteRepository.GetTestSuiteDefinition();
-
-            return suiteProperties;
-        }
 
         private static Assembly ResolveEventHandler(object sender, ResolveEventArgs e)
         {
