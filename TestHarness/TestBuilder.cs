@@ -117,7 +117,6 @@ namespace net.PaulChristensen.TestHarnessLib
             PrepareNextTest();
 
             Assembly assembly = Assembly.LoadFile(testEntity.TestFileFullName);
-            //Type type = assembly.GetType(TestApplicationTypeName);
             Type type = assembly.GetType(testEntity.TypeName);
             test = (ITest)Activator.CreateInstance(type);
             _currentDomain.SetData("ITest", test);
@@ -125,7 +124,6 @@ namespace net.PaulChristensen.TestHarnessLib
 
             test.ConfigureTest(harness);
             test.PrimaryIteratorCount(testEntity.RepeatCount);
-            //Dictionary<string, string> testProperties = _testProperties.Peek();
 
             test.TestName = testEntity.TestName;
             test.TestDescription = testEntity.TestDescription;
