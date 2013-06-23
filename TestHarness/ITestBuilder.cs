@@ -19,12 +19,13 @@
  */
 
 using System.Collections.Generic;
+using net.PaulChristensen.TestRunnerDataLink.Entities;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
     public interface ITestBuilder
     {
-        bool GetNextTest(out ITest test, IHarness harness);
+        bool GetNextTest(out ITest test, IHarness harness, TestEntity testEntity);
         int TestCount { get; }
         /// <summary>
         /// Load all test objects in to memory

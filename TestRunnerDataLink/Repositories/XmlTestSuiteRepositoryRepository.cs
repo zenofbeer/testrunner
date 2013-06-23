@@ -86,6 +86,7 @@ namespace net.PaulChristensen.TestRunnerDataLink.Repositories
                 test.RepeatCount = (null != result.Attribute("repeatCount"))
                                        ? StringHelpers.GetIntFromString(result.Attribute("repeatCount").Value)
                                        : 0;
+                test.TestFileFullName = string.Concat(test.Path, test.FileName);
                 tests.Add(test);
             }
             return tests;

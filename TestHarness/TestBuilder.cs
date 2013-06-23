@@ -19,6 +19,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using net.PaulChristensen.Common.Utils;
@@ -63,10 +64,11 @@ namespace net.PaulChristensen.TestHarnessLib
         public Dictionary<string, ITest> LoadAllTests(IHarness harness)
         {
             var testSet = new Dictionary<string, ITest>();
-            for (var i = 0; i < TestCount; i++)
+
+            foreach (var testEntity in SourceTestBatch.Tests)
             {
                 ITest test;
-                GetNextTest(out test, harness);
+                GetNextTest(out test, harness, testEntity);
                 testSet.Add(test.TestName, test);
             }
             return testSet;
@@ -108,24 +110,25 @@ namespace net.PaulChristensen.TestHarnessLib
         }
 
 
-        public bool GetNextTest(out ITest test, IHarness harness)
+        public bool GetNextTest(out ITest test, IHarness harness, TestRunnerDataLink.Entities.TestEntity testEntity)
         {            
             bool retVal = true;
 
             PrepareNextTest();
 
-            Assembly assembly = Assembly.LoadFile(TestApplicationPath);
-            Type type = assembly.GetType(TestApplicationTypeName);
+            Assembly assembly = Assembly.LoadFile(testEntity.TestFileFullName);
+            //Type type = assembly.GetType(TestApplicationTypeName);
+            Type type = assembly.GetType(testEntity.TypeName);
             test = (ITest)Activator.CreateInstance(type);
             _currentDomain.SetData("ITest", test);
             test.SetDependencyList(_testDependancies);
 
             test.ConfigureTest(harness);
-            test.PrimaryIteratorCount(RepeatCount);
-            Dictionary<string, string> testProperties = _testProperties.Peek();
+            test.PrimaryIteratorCount(testEntity.RepeatCount);
+            //Dictionary<string, string> testProperties = _testProperties.Peek();
 
-            test.TestName = GetValue("name", testProperties);
-            test.TestDescription = GetValue("description", testProperties);
+            test.TestName = testEntity.TestName;
+            test.TestDescription = testEntity.TestDescription;
 
             CompleteTest();
 

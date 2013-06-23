@@ -11,6 +11,7 @@ namespace net.PaulChristensen.TestRunnerDataLink.Entities
         public string FileName { get; set; }
         public string TypeName { get; set; }
         public int RepeatCount { get; set; }
+        public string TestFileFullName { get; set; }
         public Dictionary<string, string> Properties { get; set; }
         // add dependencies list
     }
