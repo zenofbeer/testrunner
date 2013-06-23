@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B32FC8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunnerDataConnector", "TestRunnerDataLink\TestRunnerDataConnector.csproj", "{F6B651FE-2C41-49E2-8E79-D7167B2B42C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{67B507BE-9762-464A-A83D-7B65F774C8A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{F6B651FE-2C41-49E2-8E79-D7167B2B42C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6B651FE-2C41-49E2-8E79-D7167B2B42C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6B651FE-2C41-49E2-8E79-D7167B2B42C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B507BE-9762-464A-A83D-7B65F774C8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B507BE-9762-464A-A83D-7B65F774C8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B507BE-9762-464A-A83D-7B65F774C8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B507BE-9762-464A-A83D-7B65F774C8A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

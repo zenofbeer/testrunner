@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using net.PaulChristensen.TestRunnerDataLink.Entities;
 
 namespace net.PaulChristensen.TestRunnerDataLink.Repositories
 {
@@ -13,6 +14,18 @@ namespace net.PaulChristensen.TestRunnerDataLink.Repositories
         /// get the test definition containing test suite global properties
         /// </summary>
         /// <returns></returns>
-        Dictionary<string, string> GetTestSuiteDefinition(); 
+        Dictionary<string, string> GetTestSuiteDefinition();
+        /// <summary>
+        /// get a test suite
+        /// </summary>
+        /// <param name="testSuiteId"></param>
+        /// <returns></returns>
+        TestSuite GetTestSuite(int testSuiteId);
+        /// <summary>
+        /// get the list of tests based on the testSuiteId
+        /// </summary>
+        /// <param name="testSuiteId"></param>
+        /// <returns></returns>
+        List<TestEntity> GetTests(int testSuiteId);
     }
 }

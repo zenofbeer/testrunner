@@ -11,11 +11,14 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
     /// </summary>
     public class TestEntity
     {
+
         public TestEntity(XElement testElement, Dictionary<string, string> testProperties)
         {
             ProcessTestElement(testElement.Attributes(), testProperties);
             ProcessDependencyElements(testElement.Elements(Constants.ElementDependency), testProperties);
         }
+
+        public int TestEntityId { get; set; }
 
         /// <summary>
         /// The test name.
@@ -69,6 +72,8 @@ namespace net.PaulChristensen.TestHarnessLib.Entities
                     ProcessVariableAttribute(ref tempAttribute, testProperties);
                     attribute.Value = tempAttribute.Value;
                 }
+
+
 
                 if (attribute.Name == Constants.TestPathAttribute)
                     Path = attribute.Value;

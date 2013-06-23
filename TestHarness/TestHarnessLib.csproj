@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Entities\TestDependencyEntity.cs" />
     <Compile Include="Entities\TestEntity.cs" />
-    <Compile Include="Entities\TestEntities.cs" />
+    <Compile Include="Entities\TestSuite.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Harness.cs" />
     <Compile Include="IHarness.cs" />
@@ -94,6 +94,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{67b507be-9762-464a-a83d-7b65f774c8a5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestRunnerDataLink\TestRunnerDataConnector.csproj">
       <Project>{f6b651fe-2c41-49e2-8e79-d7167b2b42c7}</Project>
       <Name>TestRunnerDataConnector</Name>

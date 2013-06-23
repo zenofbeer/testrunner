@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
+using net.PaulChristensen.Common.Utils;
 using net.PaulChristensen.TestHarnessLib.Entities;
 using net.PaulChristensen.TestHarnessLib.Util;
 using net.PaulChristensen.TestRunnerDataLink.Repositories;
@@ -29,13 +30,13 @@ namespace net.PaulChristensen.TestHarnessLib
 {
     internal class TestBuilder : ITestBuilder
     {
+
         private readonly Stack<Dictionary<string, string>> _testProperties;
         private readonly Dictionary<string, string> _testDependancies;
         private readonly Dictionary<string, ITest> _allTests; 
         private readonly ITestSuiteRepository _testSuiteRepository;
         private readonly XDocument _xDoc;
         private XElement _nextElement;
-        private readonly int _testCount;
         private readonly AppDomain _currentDomain;
 
         //ToDo: clean this up so it's not calling the data source directly. 
@@ -51,18 +52,18 @@ namespace net.PaulChristensen.TestHarnessLib
             //ToDo: inject this and create a manager for data requests
             _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
 
-            SourceTestBatch = new TestEntities();
+            SourceTestBatch = _testSuiteRepository.GetTestSuite(1);
             var globalProperties = ProcessTestHeader();
             SourceTestBatch.SuiteProperties = globalProperties;
             _testProperties.Push(globalProperties);
-            _nextElement = _xDoc.Element("tests").Element("test");
-            _testCount = _testSuiteRepository.GetTestCount();
+            _nextElement = _xDoc.Element("testSuite").Element("test");
+            TestCount = _testSuiteRepository.GetTestCount();
         }
 
         public Dictionary<string, ITest> LoadAllTests(IHarness harness)
         {
             var testSet = new Dictionary<string, ITest>();
-            for (var i = 0; i < _testCount; i++)
+            for (var i = 0; i < TestCount; i++)
             {
                 ITest test;
                 GetNextTest(out test, harness);
@@ -71,20 +72,16 @@ namespace net.PaulChristensen.TestHarnessLib
             return testSet;
         }
 
-        public int TestCount
-        {
-            get { return _testCount; }
-        }
+        public int TestCount { get; set; }
 
-        public TestEntities SourceTestBatch { get; private set; }
+        public net.PaulChristensen.TestRunnerDataLink.Entities.TestSuite SourceTestBatch { get; private set; }
 
         private string TestApplicationPath
         {
             get
             {
                 var path = _testProperties.Peek()[Properties.Settings.Default.PathKey];
-                StringHelper.TrimTrailingSlashes(ref path);
-                path = path + '\\';
+                StringHelpers.FixPath(ref path);
                 return path + _testProperties.Peek()[Properties.Settings.Default.FileNameKey];
             }
         }
@@ -109,6 +106,7 @@ namespace net.PaulChristensen.TestHarnessLib
                 return repeatCount;
             }
         }
+
 
         public bool GetNextTest(out ITest test, IHarness harness)
         {            
