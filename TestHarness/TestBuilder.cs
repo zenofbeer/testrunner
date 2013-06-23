@@ -22,21 +22,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
-using net.PaulChristensen.Common.Utils;
-using net.PaulChristensen.TestHarnessLib.Entities;
-using net.PaulChristensen.TestHarnessLib.Util;
 using net.PaulChristensen.TestRunnerDataLink.Repositories;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
     internal class TestBuilder : ITestBuilder
     {
-
-        private readonly Stack<Dictionary<string, string>> _testProperties;
-        private readonly Dictionary<string, string> _testDependancies;
-        private readonly Dictionary<string, ITest> _allTests; 
         private readonly ITestSuiteRepository _testSuiteRepository;
-        private readonly XDocument _xDoc;
         private XElement _nextElement;
         private readonly AppDomain _currentDomain;
 
@@ -46,18 +38,12 @@ namespace net.PaulChristensen.TestHarnessLib
             _currentDomain = AppDomain.CurrentDomain;
             _currentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);
 
-
-            _testProperties = new Stack<Dictionary<string, string>>();
-            _testDependancies = new Dictionary<string, string>();
-            _xDoc = XDocument.Load("HarnessConfig.xml");
             //ToDo: inject this and create a manager for data requests
             _testSuiteRepository = new XmlTestSuiteRepositoryRepository();
 
             SourceTestBatch = _testSuiteRepository.GetTestSuite(1);
             var globalProperties = ProcessTestHeader();
             SourceTestBatch.SuiteProperties = globalProperties;
-            _testProperties.Push(globalProperties);
-            _nextElement = _xDoc.Element("testSuite").Element("test");
             TestCount = _testSuiteRepository.GetTestCount();
         }
 
@@ -78,57 +64,20 @@ namespace net.PaulChristensen.TestHarnessLib
 
         public net.PaulChristensen.TestRunnerDataLink.Entities.TestSuite SourceTestBatch { get; private set; }
 
-        private string TestApplicationPath
-        {
-            get
-            {
-                var path = _testProperties.Peek()[Properties.Settings.Default.PathKey];
-                StringHelpers.FixPath(ref path);
-                return path + _testProperties.Peek()[Properties.Settings.Default.FileNameKey];
-            }
-        }
-
-        private string TestApplicationTypeName
-        {
-            get
-            {
-                return _testProperties.Peek()[Properties.Settings.Default.TypeNameKey];
-            }
-        }
-
-        private int RepeatCount
-        {
-            get
-            {
-                int repeatCount = 0;
-                if (_testProperties.Peek().ContainsKey(Properties.Settings.Default.RepeatCountKey))
-                {                    
-                    int.TryParse(_testProperties.Peek()[Properties.Settings.Default.RepeatCountKey], out repeatCount);
-                }
-                return repeatCount;
-            }
-        }
-
-
         public bool GetNextTest(out ITest test, IHarness harness, TestRunnerDataLink.Entities.TestEntity testEntity)
         {            
             bool retVal = true;
-
-            PrepareNextTest();
 
             Assembly assembly = Assembly.LoadFile(testEntity.TestFileFullName);
             Type type = assembly.GetType(testEntity.TypeName);
             test = (ITest)Activator.CreateInstance(type);
             _currentDomain.SetData("ITest", test);
-            test.SetDependencyList(_testDependancies);
 
             test.ConfigureTest(harness);
             test.PrimaryIteratorCount(testEntity.RepeatCount);
 
             test.TestName = testEntity.TestName;
             test.TestDescription = testEntity.TestDescription;
-
-            CompleteTest();
 
             return retVal;
         }
@@ -139,84 +88,7 @@ namespace net.PaulChristensen.TestHarnessLib
             if (testProperties.ContainsKey(key))
                 retVal = testProperties[key];
             return retVal;
-        }
-
-        private void PrepareNextTest()
-        {
-            var testEntity = new TestEntity(_nextElement, _testProperties.Peek());
-
-            IEnumerable<XAttribute> attributeCollection = _nextElement.Attributes();
-            Dictionary<string, string> currentAttributeCollection = _testProperties.Peek();
-            var newAttributeCollection = new Dictionary<string, string>();
-
-            newAttributeCollection[Constants.TestPathAttribute] = testEntity.Path;
-
-            foreach (string key in currentAttributeCollection.Keys)
-            {
-                if (!newAttributeCollection.ContainsKey(key))
-                {
-                    newAttributeCollection[key] = currentAttributeCollection[key];
-                }
-            }
-
-            foreach (var attribute in attributeCollection)
-            {
-                if (!newAttributeCollection.ContainsKey(attribute.Name.ToString()))
-                {
-                    newAttributeCollection[attribute.Name.ToString()] = attribute.Value;
-                }
-            }
-
-            _testProperties.Push(newAttributeCollection);
-
-            IEnumerable<XElement> dependancyNodes = _nextElement.Elements("dependency");
-            Dictionary<string, string> tempTestDependency = new Dictionary<string, string>();
-            foreach (XElement element in dependancyNodes)
-            {
-                IEnumerable<XAttribute> dependencyAttributes = element.Attributes();
-                foreach (XAttribute attribute in dependencyAttributes)
-                {
-                    string tempValue = attribute.Value;
-                    if(StringHelper.IsVariable(tempValue))
-                    {
-                        StringHelper.StripVariableDelimiters(ref tempValue);
-                        StringHelper.TrimTrailingSlashes(ref tempValue);
-                        if (attribute.Name.ToString() == "path")
-                        {
-                            if (tempValue.Length != 0)
-                            {
-                                tempValue = tempValue.TrimEnd('\\') + '\\';
-                            }
-                        }
-                        tempValue = _testProperties.Peek()[attribute.Name.ToString()] + tempValue;
-                    }
-
-                    tempTestDependency[attribute.Name.ToString()] = tempValue;
-
-                }
-
-                IEnumerable<XElement> dependencyElements = element.Elements();
-                List<string> types = new List<string>();
-                foreach (XElement dependencyElement in dependencyElements)
-                {
-                    if (dependencyElement.Name == "typeName")
-                    {
-                        types.Add(dependencyElement.Value);
-                    }
-                }
-
-                GetDependencyTypes(ref tempTestDependency, types);
-
-                _testDependancies[tempTestDependency["name"]] = GetDependencyList(tempTestDependency);
-                Dictionary<string, string> dependTest = new Dictionary<string, string>();
-                foreach (var depends in testEntity.Dependencies)
-                {
-                    dependTest.Add(depends.Name, depends.Path + "|" + depends.Name + "|" +
-                        depends.Extension + "|" + Constants.ElementTypeName + "=" +
-                        string.Join(",", depends.TypeNames.ToArray()));
-                }         
-            }                    
-        }
+        }       
 
         private string GetDependencyList(Dictionary<string, string> dependency)
         {
@@ -242,28 +114,7 @@ namespace net.PaulChristensen.TestHarnessLib
                 if (!string.IsNullOrEmpty(dependencyList))
                     tempTestDependency.Add("typeName", dependencyList);
             }
-        }
-
-        private void CompleteTest()
-        {
-            _testDependancies.Clear();
-            _testProperties.Pop();
-
-            var nextElement = _nextElement.NextNode;
-            if (nextElement.GetType() != typeof(XElement))
-            {
-                do
-                {
-                    nextElement = nextElement.NextNode;
-                }
-                while ((null != nextElement) && (nextElement.GetType() != typeof(XElement)));
-                _nextElement = (XElement)nextElement;
-            }
-            else
-            {
-                _nextElement = (XElement)_nextElement.NextNode;
-            }
-        }        
+        }       
 
         /// <summary>
         /// Get Test Suite global propeties
