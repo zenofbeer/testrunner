@@ -12,11 +12,6 @@ namespace net.PaulChristensen.TestRunner
 {
     class Program
     {
-
-        private bool _currentTestPassed;
-        //private TestBatch _testBatch;
-
-
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();

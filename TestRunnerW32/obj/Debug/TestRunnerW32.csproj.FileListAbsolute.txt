@@ -17,14 +17,12 @@ C:\Dev\net.PaulChristensen\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristense
 C:\Dev\net.PaulChristensen\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.pdb
 C:\Dev\net.PaulChristensen\TestRunner\TestBin\Docs\License.txt
 C:\Dev\net.PaulChristensen\TestRunner\TestBin\Docs\TestTemplate.cs
-D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestRunnerW32.exe.config
-D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.exe
-D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.pdb
 D:\dev\personal\TestRunner\TestBin\Docs\License.txt
 D:\dev\personal\TestRunner\TestBin\Docs\TestTemplate.cs
 D:\dev\personal\TestRunner\TestBin\HarnessConfig.xml
 D:\dev\personal\TestRunner\TestBin\Properties\Resource.resx
 D:\dev\personal\TestRunner\TestBin\Properties\Resource.Designer.cs
+D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestRunnerW32.exe.config
 D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestRunnerW32.exe
 D:\dev\personal\TestRunner\TestBin\net.PaulChristensen.TestRunnerW32.pdb
 D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\TestRunnerW32.csprojResolveAssemblyReference.cache
@@ -36,3 +34,5 @@ D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\Runner.baml
 D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.g.resources
 D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.Properties.Resource.resources
 D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\TestRunnerW32.csproj.GenerateResource.Cache
+D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.exe
+D:\dev\personal\TestRunner\TestRunnerW32\obj\Debug\net.PaulChristensen.TestRunnerW32.pdb

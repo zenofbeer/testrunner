@@ -26,7 +26,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using net.PaulChristensen.TestHarnessLib;
+using net.PaulChristensen.TestRunnerDataLink.Managers;
+using net.PaulChristensen.TestRunnerDataLink.Repositories;
 using net.PaulChristensen.TestRunnerW32.DataObjects;
+using Autofac;
 
 namespace net.PaulChristensen.TestRunnerW32
 {
@@ -53,14 +56,22 @@ namespace net.PaulChristensen.TestRunnerW32
 
         public Runner()
         {
-            InitializeComponent();
-            PopulateButtonList();
-            RunTestCountString = "0";
-            CurrentTestCountString = "0";
-            _suiteProgressPercent = 0;
-            _availableTests = new AvailableTests();
-            _iHarness = new Harness(this);
-            _results = new Results();
+            var builder = new ContainerBuilder();
+            builder.RegisterType<XmlTestSuiteRepositoryRepository>().As<ITestSuiteRepository>();
+            builder.RegisterType<TestBuilderManager>().As<ITestBuilderManager>();
+
+            using (var container = builder.Build())
+            {
+                var manager = container.Resolve<ITestBuilderManager>();
+                InitializeComponent();
+                PopulateButtonList();
+                RunTestCountString = "0";
+                CurrentTestCountString = "0";
+                _suiteProgressPercent = 0;
+                _availableTests = new AvailableTests();
+                _iHarness = new Harness(this, manager);
+                _results = new Results();
+            }
         }
 
         private void PopulateButtonList()

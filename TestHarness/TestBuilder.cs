@@ -28,8 +28,7 @@ namespace net.PaulChristensen.TestHarnessLib
 {
     internal class TestBuilder : ITestBuilder
     {
-        private readonly ITestBuilderManager _testSuiteRepository;
-        private XElement _nextElement;
+        private readonly ITestBuilderManager _testBuilderManager;
         private readonly AppDomain _currentDomain;
 
         public TestBuilder(ITestBuilderManager manager)
@@ -37,10 +36,10 @@ namespace net.PaulChristensen.TestHarnessLib
             _currentDomain = AppDomain.CurrentDomain;
             _currentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);
 
-            _testSuiteRepository = manager;
+            _testBuilderManager = manager;
 
-            SourceTestBatch = _testSuiteRepository.GetTestSuite(1);
-            TestCount = _testSuiteRepository.GetTestCount();
+            SourceTestBatch = _testBuilderManager.GetTestSuite(1);
+            TestCount = _testBuilderManager.GetTestCount();
         }
 
         public Dictionary<string, ITest> LoadAllTests(IHarness harness)

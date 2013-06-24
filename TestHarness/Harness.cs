@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using net.PaulChristensen.TestRunnerDataLink.Managers;
-using net.PaulChristensen.TestRunnerDataLink.Repositories;
 
 namespace net.PaulChristensen.TestHarnessLib
 {
@@ -51,10 +50,10 @@ namespace net.PaulChristensen.TestHarnessLib
 
         private delegate void ExecuteTestDelegate(ITest test);
 
-        public Harness(IW32Console iW32Console)
+        public Harness(IW32Console iW32Console, ITestBuilderManager manager)
         {
             _iW32Console = iW32Console;
-            InitializeHarness(null);
+            InitializeHarness(manager);
             _availableTests = _testBuilder.LoadAllTests(this);
             
             foreach (var availableTest in _availableTests.Values)
