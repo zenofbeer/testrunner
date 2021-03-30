@@ -95,3 +95,7 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+.idea
+TestBin/*
+packages/*
