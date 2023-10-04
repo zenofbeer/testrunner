@@ -1,4 +1,4 @@
-﻿<testSuite testSuiteId="1" testSuiteName="my test suite" path="D:\dev\personal\TestRunner\TestBin">
+﻿<testSuite testSuiteId="1" testSuiteName="my test suite" path="C:\dev\personal\TestRunner\TestBin">
   <!--<test name="Validator Simulator Test" description="Validates the datasets inserted to the database by the ValidatorSimulator."
         path="${path}" fileName="eO.Lib.Test.Integration.Business.Manager.ValidatorSimulatorManager.dll"
         typeName="eO.Lib.Test.Integration.Business.Manager.ValidatorSimulatorManager.Test"

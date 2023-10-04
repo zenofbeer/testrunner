@@ -26,3 +26,14 @@ D:/dev/personal/TestRunner/TestHarness/obj/Debug/net.PaulChristensen.TestHarness
 /home/pellischristensen/dev/testrunner/TestHarness/obj/Debug/TestHarnessLib.csproj.CopyComplete
 /home/pellischristensen/dev/testrunner/TestHarness/obj/Debug/net.PaulChristensen.TestHarnessLib.dll
 /home/pellischristensen/dev/testrunner/TestHarness/obj/Debug/net.PaulChristensen.TestHarnessLib.pdb
+C:\dev\personal\testrunner\TestBin\Docs\License.txt
+C:\dev\personal\testrunner\TestBin\Docs\TestTemplate.cs
+C:\dev\personal\testrunner\TestBin\HarnessConfig.xml
+C:\dev\personal\testrunner\TestBin\net.PaulChristensen.TestHarnessLib.dll.config
+C:\dev\personal\testrunner\TestBin\net.PaulChristensen.TestHarnessLib.dll
+C:\dev\personal\testrunner\TestBin\net.PaulChristensen.TestHarnessLib.pdb
+C:\dev\personal\testrunner\TestHarness\obj\Debug\TestHarnessLib.csproj.AssemblyReference.cache
+C:\dev\personal\testrunner\TestHarness\obj\Debug\TestHarnessLib.csproj.CoreCompileInputs.cache
+C:\dev\personal\testrunner\TestHarness\obj\Debug\TestHarnessLib.csproj.CopyComplete
+C:\dev\personal\testrunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.dll
+C:\dev\personal\testrunner\TestHarness\obj\Debug\net.PaulChristensen.TestHarnessLib.pdb
